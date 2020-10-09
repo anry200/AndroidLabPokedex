@@ -28,25 +28,43 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter.loadData()
     }
 
-    override fun showLoading() {
+    override fun render(state: ViewState) {
+
+        when (state) {
+            is ViewState.Loading -> {
+                showLoading()
+            }
+
+            is ViewState.Error -> {
+                showError()
+            }
+
+            is ViewState.Content -> {
+                showContent()
+                setData(state.data)
+            }
+        }
+    }
+
+    fun showLoading() {
         loadingView.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
         errorView.visibility = View.GONE
     }
 
-    override fun showContent() {
+    fun showContent() {
         loadingView.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
         errorView.visibility = View.GONE
     }
 
-    override fun showError() {
+    fun showError() {
         loadingView.visibility = View.GONE
         recyclerView.visibility = View.GONE
         errorView.visibility = View.VISIBLE
     }
 
-    override fun setData(data: List<Pokemon>) {
+    fun setData(data: List<Pokemon>) {
         adapter.submitList(data)
     }
 
