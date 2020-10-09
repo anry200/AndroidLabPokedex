@@ -1,7 +1,11 @@
-package com.anry200.thepokedex
+package com.anry200.thepokedex.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.anry200.thepokedex.R
+import com.anry200.thepokedex.data.PokemonRepositoryImpl
+import com.anry200.thepokedex.domain.PokemonRepository
+import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.activity_main.recyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
-        adapter.submitList(pokemonList)
+        val repository: PokemonRepository = PokemonRepositoryImpl()
+
+        adapter.submitList(repository.getPokemonList())
     }
 }

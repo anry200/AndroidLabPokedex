@@ -1,4 +1,4 @@
-package com.anry200.thepokedex
+package com.anry200.thepokedex.presentation.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anry200.thepokedex.R
+import com.anry200.thepokedex.domain.Pokemon
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception

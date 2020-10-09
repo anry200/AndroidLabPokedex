@@ -1,4 +1,4 @@
-package com.anry200.thepokedex
+package com.anry200.thepokedex.domain
 
 data class Pokemon(val id: String, val name: String,  val imageUrl: String)
 
