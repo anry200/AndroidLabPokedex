@@ -26,47 +26,32 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
-        viewModel.viewState.observe(this, Observer { viewState ->
-            render(viewState)
+        viewModel.isLoadingLiveData.observe(this, Observer {
+            loadingView.visibility = if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        })
+
+        viewModel.isErrorLiveData.observe(this, Observer {
+            errorView.visibility = if (it) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        })
+
+        viewModel.contentLiveData.observe(this, Observer { data ->
+            recyclerView.visibility = if (data.isNotEmpty()) { //bad
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            setData(data)
         })
 
         viewModel.loadData()
-    }
-
-    fun render(state: ViewState) {
-
-        when (state) {
-            is ViewState.Loading -> {
-                showLoading()
-            }
-
-            is ViewState.Error -> {
-                showError()
-            }
-
-            is ViewState.Content -> {
-                showContent()
-                setData(state.data)
-            }
-        }
-    }
-
-    fun showLoading() {
-        loadingView.visibility = View.VISIBLE
-        recyclerView.visibility = View.GONE
-        errorView.visibility = View.GONE
-    }
-
-    fun showContent() {
-        loadingView.visibility = View.GONE
-        recyclerView.visibility = View.VISIBLE
-        errorView.visibility = View.GONE
-    }
-
-    fun showError() {
-        loadingView.visibility = View.GONE
-        recyclerView.visibility = View.GONE
-        errorView.visibility = View.VISIBLE
     }
 
     fun setData(data: List<Pokemon>) {

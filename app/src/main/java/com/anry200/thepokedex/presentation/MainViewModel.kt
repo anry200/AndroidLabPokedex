@@ -12,27 +12,31 @@ import kotlin.random.Random
 class MainViewModel: ViewModel() {
     private val repository: PokemonRepository = PokemonRepositoryImpl()
 
-    private val _viewState = MutableLiveData<ViewState>()
-    val viewState: LiveData<ViewState> = _viewState
+    private val _isLoadingLiveData = MutableLiveData<Boolean>()
+    val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData
 
+    private val _isErrorLiveData = MutableLiveData<Boolean>()
+    val isErrorLiveData: LiveData<Boolean> = _isErrorLiveData
+
+    private val _contentLiveData = MutableLiveData<List<Pokemon>>()
+    val contentLiveData: LiveData<List<Pokemon>> = _contentLiveData
 
     fun loadData() {
-        _viewState.value = ViewState.Loading
+        _isLoadingLiveData.value = true
+        _isErrorLiveData.value = false
+        _contentLiveData.value = emptyList() //bad
 
         Handler().postDelayed({
             if (Random.nextInt() % 10  == 0) {
-                _viewState.value = ViewState.Error
+                _isLoadingLiveData.value = false
+                _isErrorLiveData.value = true
+                _contentLiveData.value = emptyList() //bad
             } else {
                 val data = repository.getPokemonList()
-                _viewState.value = ViewState.Content(data)
+                _isLoadingLiveData.value = false
+                _isErrorLiveData.value = false
+                _contentLiveData.postValue(data)
             }
         }, 3000)
     }
-}
-
-
-sealed class ViewState {
-    object Loading: ViewState()
-    object Error: ViewState()
-    data class Content(val data: List<Pokemon>): ViewState()
 }
