@@ -3,6 +3,9 @@ package com.anry200.thepokedex.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.anry200.thepokedex.R
 import com.anry200.thepokedex.data.PokemonRepositoryImpl
 import com.anry200.thepokedex.domain.Pokemon
@@ -12,10 +15,10 @@ import kotlinx.android.synthetic.main.activity_main.errorView
 import kotlinx.android.synthetic.main.activity_main.loadingView
 import kotlinx.android.synthetic.main.activity_main.recyclerView
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity() {
     private val adapter = PokemonListAdapter()
-    private val repository: PokemonRepository = PokemonRepositoryImpl()
-    private val presenter = MainPresenter(repository)
+    private val viewModel by viewModels<MainViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +26,14 @@ class MainActivity : AppCompatActivity(), MainView {
 
         recyclerView.adapter = adapter
 
-        presenter.attachView(this)
+        viewModel.viewState.observe(this, Observer { viewState ->
+            render(viewState)
+        })
 
-        presenter.loadData()
+        viewModel.loadData()
     }
 
-    override fun render(state: ViewState) {
+    fun render(state: ViewState) {
 
         when (state) {
             is ViewState.Loading -> {
@@ -66,10 +71,5 @@ class MainActivity : AppCompatActivity(), MainView {
 
     fun setData(data: List<Pokemon>) {
         adapter.submitList(data)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
     }
 }
