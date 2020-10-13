@@ -12,7 +12,6 @@ import com.anry200.thepokedex.R
 import com.anry200.thepokedex.domain.Pokemon
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHolder>(PokemonItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {

@@ -1,15 +1,12 @@
 package com.anry200.thepokedex.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.anry200.thepokedex.R
-import com.anry200.thepokedex.data.PokemonRepositoryImpl
 import com.anry200.thepokedex.domain.Pokemon
-import com.anry200.thepokedex.domain.PokemonRepository
 import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.activity_main.errorView
 import kotlinx.android.synthetic.main.activity_main.loadingView

@@ -1,7 +1,9 @@
 package com.anry200.thepokedex.domain
 
-data class Pokemon(val id: String, val name: String,  val imageUrl: String)
-
+/**
+ * Minimum information about Pokemon, probably better rename to PokemonPartial
+ */
+data class Pokemon(val id: String, val name: String,  val imageUrl: String) //Pokemon Entity
 
 //https://pokeapi.co/
 //https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pok%C3%A9mon)

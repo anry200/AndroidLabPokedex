@@ -10,7 +10,7 @@ import com.anry200.thepokedex.domain.PokemonRepository
 import kotlin.random.Random
 
 class MainViewModel: ViewModel() {
-    private val repository: PokemonRepository = PokemonRepositoryImpl()
+    private val repository: PokemonRepository = PokemonRepositoryImpl() //TODO: DI
 
     private val _isLoadingLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData
@@ -22,21 +22,40 @@ class MainViewModel: ViewModel() {
     val contentLiveData: LiveData<List<Pokemon>> = _contentLiveData
 
     fun loadData() {
-        _isLoadingLiveData.value = true
-        _isErrorLiveData.value = false
-        _contentLiveData.value = emptyList() //bad
+        showLoading()
 
         Handler().postDelayed({
             if (Random.nextInt() % 10  == 0) {
-                _isLoadingLiveData.value = false
-                _isErrorLiveData.value = true
-                _contentLiveData.value = emptyList() //bad
+                showError()
             } else {
-                val data = repository.getPokemonList()
-                _isLoadingLiveData.value = false
-                _isErrorLiveData.value = false
-                _contentLiveData.postValue(data)
+                repository.getPokemonList(object : PokemonRepository.ApiCallback<List<Pokemon>> {
+                    override fun onSuccess(data: List<Pokemon>) {
+                        showData(data)
+                    }
+
+                    override fun onError() {
+                        showError()
+                    }
+                })
             }
         }, 3000)
+    }
+
+    private fun showLoading() {
+        _isLoadingLiveData.value = true
+        _isErrorLiveData.value = false
+        _contentLiveData.value = emptyList() //bad
+    }
+
+    private fun showData(data: List<Pokemon>) {
+        _isLoadingLiveData.value = false
+        _isErrorLiveData.value = false
+        _contentLiveData.postValue(data)
+    }
+
+    private fun showError() {
+        _isLoadingLiveData.value = false
+        _isErrorLiveData.value = true
+        _contentLiveData.value = emptyList() //bad
     }
 }
