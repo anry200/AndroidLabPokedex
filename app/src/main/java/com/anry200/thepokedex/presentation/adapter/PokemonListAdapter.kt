@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anry200.thepokedex.R
@@ -14,6 +15,13 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHolder>(PokemonItemDiffCallback()) {
+
+   var pokemonOnClickListener: PokemonItemOnClickListener? = null
+
+    interface PokemonItemOnClickListener {
+        fun onClicked(id: String)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         return PokemonViewHolder(
             LayoutInflater.from(parent.context)
@@ -22,14 +30,18 @@ class PokemonListAdapter: ListAdapter<Pokemon, PokemonListAdapter.PokemonViewHol
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.bindTo(getItem(position))
+        holder.bindTo(getItem(position), pokemonOnClickListener)
     }
 
     class PokemonViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val name = view.findViewById<TextView>(R.id.name)
         private val image = view.findViewById<ImageView>(R.id.image)
 
-        fun bindTo(pokemon: Pokemon){
+        fun bindTo(pokemon: Pokemon, pokemonOnClickListener: PokemonItemOnClickListener?){
+            itemView.setOnClickListener {
+                pokemonOnClickListener?.onClicked(pokemon.id)
+            }
+
             name.text = pokemon.name
 
             Picasso.get()
