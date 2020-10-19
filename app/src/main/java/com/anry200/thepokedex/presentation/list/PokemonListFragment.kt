@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.anry200.thepokedex.R
 import com.anry200.thepokedex.domain.Pokemon
+import com.anry200.thepokedex.presentation.Router
 import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
 import com.anry200.thepokedex.presentation.details.PokemonDetailsFragment
 import kotlinx.android.synthetic.main.fragment_pokemon_list.errorView
@@ -25,12 +26,7 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
 
         adapter.pokemonOnClickListener = object : PokemonListAdapter.PokemonItemOnClickListener {
             override fun onClicked(id: String) {
-                val fragment = PokemonDetailsFragment.newInstance(id)
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment, null)
-                    .addToBackStack(null)
-                    .commit()
+                (requireActivity() as? Router)?.openPokemonDetails(id)
             }
         }
 
