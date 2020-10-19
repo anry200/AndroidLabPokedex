@@ -1,6 +1,5 @@
 package com.anry200.thepokedex.data
 
-import android.content.ClipData
 import com.anry200.thepokedex.domain.Pokemon
 import com.anry200.thepokedex.domain.PokemonDetails
 import com.anry200.thepokedex.domain.PokemonRepository

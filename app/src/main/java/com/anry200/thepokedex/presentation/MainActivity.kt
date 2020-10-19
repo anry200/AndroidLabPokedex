@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), Router {
             .commit()
     }
 
-    override fun openPokemonDetails(id: kotlin.String) {
+    override fun openPokemonDetails(id: String) {
         val fragment = PokemonDetailsFragment.newInstance(id)
 
         supportFragmentManager.beginTransaction()

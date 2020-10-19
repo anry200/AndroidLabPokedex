@@ -9,7 +9,6 @@ import com.anry200.thepokedex.R
 import com.anry200.thepokedex.domain.Pokemon
 import com.anry200.thepokedex.presentation.Router
 import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
-import com.anry200.thepokedex.presentation.details.PokemonDetailsFragment
 import kotlinx.android.synthetic.main.fragment_pokemon_list.errorView
 import kotlinx.android.synthetic.main.fragment_pokemon_list.loadingView
 import kotlinx.android.synthetic.main.fragment_pokemon_list.recyclerView

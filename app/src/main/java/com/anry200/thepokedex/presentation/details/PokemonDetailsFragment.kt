@@ -1,11 +1,7 @@
 package com.anry200.thepokedex.presentation.details
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +11,6 @@ import com.anry200.thepokedex.domain.PokemonDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.abilities
 import kotlinx.android.synthetic.main.fragment_pokemon_details.image
-
 import kotlinx.android.synthetic.main.item_pokemon.name
 
 const val PARAM_POKEMON_ID = "param.pokemon.id"
