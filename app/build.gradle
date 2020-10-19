@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
@@ -52,8 +54,22 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    //Cicerone
+    //implementation("com.github.terrakok:cicerone:5.0.0")
+
+    def nav_version = "2.3.0"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+//    // Feature module Support
+//    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
     //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

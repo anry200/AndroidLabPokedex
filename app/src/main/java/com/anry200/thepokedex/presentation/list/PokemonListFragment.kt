@@ -5,9 +5,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.anry200.thepokedex.R
 import com.anry200.thepokedex.domain.Pokemon
-import com.anry200.thepokedex.presentation.Router
 import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_pokemon_list.errorView
 import kotlinx.android.synthetic.main.fragment_pokemon_list.loadingView
@@ -25,7 +25,8 @@ class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
 
         adapter.pokemonOnClickListener = object : PokemonListAdapter.PokemonItemOnClickListener {
             override fun onClicked(id: String) {
-                (requireActivity() as? Router)?.openPokemonDetails(id)
+                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(id)
+                findNavController().navigate(action)
             }
         }
 
