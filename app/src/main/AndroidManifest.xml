@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
+        android:name=".App"
         android:theme="@style/Theme.ThePokedex">
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
@@ -19,8 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".presentation.details.PokemonDetailsActivity"/>
     </application>
 
 </manifest>

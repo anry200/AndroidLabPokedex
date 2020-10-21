@@ -3,13 +3,12 @@ package com.anry200.thepokedex.presentation.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anry200.thepokedex.Injector
-import com.anry200.thepokedex.data.PokemonRepositoryImpl
+import com.anry200.thepokedex.App
 import com.anry200.thepokedex.domain.PokemonDetails
 import com.anry200.thepokedex.domain.PokemonRepository
 
 class PokemonDetailsViewModel : ViewModel() {
-    private val repository: PokemonRepository = Injector.repository
+    private val repository: PokemonRepository = App.instance.appComponent.repository()
 
     private val _pokemonDetailsLiveData = MutableLiveData<PokemonDetails>()
     val pokemonDetailsLiveData: LiveData<PokemonDetails> = _pokemonDetailsLiveData

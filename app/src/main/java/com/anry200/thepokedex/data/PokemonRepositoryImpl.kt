@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PokemonRepositoryImpl(private val api: PokedexApiService) : PokemonRepository {
+class PokemonRepositoryImpl(private val api: PokedexApiService): PokemonRepository {
     //1. when cache is not valid
     private val cache = mutableMapOf<String, Pair<Long,PokemonDetails>>()
 
