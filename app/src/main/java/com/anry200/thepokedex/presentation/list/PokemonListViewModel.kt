@@ -4,13 +4,14 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anry200.thepokedex.Injector
 import com.anry200.thepokedex.data.PokemonRepositoryImpl
 import com.anry200.thepokedex.domain.Pokemon
 import com.anry200.thepokedex.domain.PokemonRepository
 import kotlin.random.Random
 
 class PokemonListViewModel: ViewModel() {
-    private val repository: PokemonRepository = PokemonRepositoryImpl() //TODO: DI
+    private val repository: PokemonRepository = Injector.repository
 
     private val _isLoadingLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData
