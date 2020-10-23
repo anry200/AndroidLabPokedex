@@ -9,10 +9,9 @@ import com.anry200.thepokedex.domain.Pokemon
 import com.anry200.thepokedex.domain.PokemonRepository
 import kotlin.random.Random
 
-class PokemonListViewModel: ViewModel() {
-    val repository: PokemonRepository by lazy {
-        App.instance.appComponent.repository()
-    }
+class PokemonListViewModel(
+    private val repository: PokemonRepository
+): ViewModel() {
 
     private val _isLoadingLiveData = MutableLiveData<Boolean>()
     val isLoadingLiveData: LiveData<Boolean> = _isLoadingLiveData

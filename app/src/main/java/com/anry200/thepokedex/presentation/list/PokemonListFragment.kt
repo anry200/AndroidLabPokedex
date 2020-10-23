@@ -11,16 +11,18 @@ import com.anry200.thepokedex.R
 import com.anry200.thepokedex.data.PokedexApiService
 import com.anry200.thepokedex.domain.Pokemon
 import com.anry200.thepokedex.domain.PokemonRepository
+import com.anry200.thepokedex.presentation.MyViewModelFactory
 import com.anry200.thepokedex.presentation.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_pokemon_list.errorView
 import kotlinx.android.synthetic.main.fragment_pokemon_list.loadingView
 import kotlinx.android.synthetic.main.fragment_pokemon_list.recyclerView
 import javax.inject.Inject
 
-
 class PokemonListFragment: Fragment(R.layout.fragment_pokemon_list) {
     private val adapter = PokemonListAdapter()
-    private val viewModel by viewModels<PokemonListViewModel>()
+    private val viewModel by viewModels<PokemonListViewModel>(
+        factoryProducer = { MyViewModelFactory() }
+    )
 
     @Inject
     lateinit var repository: PokemonRepository

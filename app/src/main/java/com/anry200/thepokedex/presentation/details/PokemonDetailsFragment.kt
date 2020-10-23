@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.anry200.thepokedex.R
 import com.anry200.thepokedex.domain.PokemonDetails
+import com.anry200.thepokedex.presentation.MyViewModelFactory
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_details.abilities
 import kotlinx.android.synthetic.main.fragment_pokemon_details.image
@@ -16,7 +17,9 @@ import kotlinx.android.synthetic.main.item_pokemon.name
 
 const val PARAM_POKEMON_ID = "param.pokemon.id"
 class PokemonDetailsFragment : Fragment(R.layout.fragment_pokemon_details) {
-    private val viewModel: PokemonDetailsViewModel by viewModels()
+    private val viewModel: PokemonDetailsViewModel by viewModels(
+            factoryProducer = { MyViewModelFactory() }
+    )
     private val navArgs by navArgs<PokemonDetailsFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

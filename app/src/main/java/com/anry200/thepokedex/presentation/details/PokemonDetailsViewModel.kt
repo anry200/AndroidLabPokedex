@@ -7,9 +7,9 @@ import com.anry200.thepokedex.App
 import com.anry200.thepokedex.domain.PokemonDetails
 import com.anry200.thepokedex.domain.PokemonRepository
 
-class PokemonDetailsViewModel : ViewModel() {
-    private val repository: PokemonRepository = App.instance.appComponent.repository()
-
+class PokemonDetailsViewModel(
+    private val repository: PokemonRepository
+) : ViewModel() {
     private val _pokemonDetailsLiveData = MutableLiveData<PokemonDetails>()
     val pokemonDetailsLiveData: LiveData<PokemonDetails> = _pokemonDetailsLiveData
 
